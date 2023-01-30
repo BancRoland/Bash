@@ -1,0 +1,23 @@
+kuvik@Thor:~/Desktop/radar_RS232$ exec 99<>/dev/ttyUSB*
+kuvik@Thor:~/Desktop/radar_RS232$ bash run_ROT_DEMO.sh 
+/dev/ttyUSB0
+[sudo] password for kuvik: 
+^C
+kuvik@Thor:~/Desktop/radar_RS232$ bash run_STOP.sh
+/dev/ttyUSB0
+kuvik@Thor:~/Desktop/radar_RS232$ stty speed < /dev/ttyUSB*
+9600
+kuvik@Thor:~/Desktop/radar_RS232$ stty ispeed 9600 < /dev/ttyUSB*
+kuvik@Thor:~/Desktop/radar_RS232$ stty speed < /dev/ttyUSB*
+9600
+kuvik@Thor:~/Desktop/radar_RS232$ exec 99<>/dev/ttyUSB*
+kuvik@Thor:~/Desktop/radar_RS232$ printf ":2I\n\r" >& 99
+kuvik@Thor:~/Desktop/radar_RS232$ printf ":2A\n\r" >& 99
+kuvik@Thor:~/Desktop/radar_RS232$ printf ":2H0800\n\r" >& 99
+kuvik@Thor:~/Desktop/radar_RS232$ bash run_ROT_DEMO.sh 
+/dev/ttyUSB0
+^C
+kuvik@Thor:~/Desktop/radar_RS232$ bash run_ROT_DEMO.sh 
+/dev/ttyUSB0
+kuvik@Thor:~/Desktop/radar_RS232$ 
+
