@@ -1,6 +1,6 @@
 DATE=$(date +%y%m%d)
 
-#rm *.log
+rm *.log
 
 #echo "kr${DATE}"
 

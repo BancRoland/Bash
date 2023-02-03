@@ -1,7 +1,17 @@
 #!/bin/bash
+HMAX=3072
+HMIN=1024
+
+VMIN=-114
+#VMAX=342; echo DEFAULT MOTOR SETUP	#alap motor
+VMAX=1010; echo ROCKET MOTOR SETUP	#ROCKET motor
+
+
 DEVICE=$(ls /dev/ttyUSB*)
 HVAL=2048
 VVAL=0
+
+
 
 echo $DEVICE
 
@@ -10,36 +20,70 @@ stty ispeed 9600 < $DEVICE
 stty speed < /dev/ttyUSB*
 exec 99<>$DEVICE
 exec 99<>/dev/ttyUSB*
-read -t 1
+read -t 0.5
+echo serial init
 printf ":2I\n\r" >& 99
-read -t 1
+read -t 0.5
+echo ":2I\n\r"
 printf ":2A\n\r" >& 99
-read -t 1
+read -t 0.5
+echo ":2A\n\r"
 printf ":2H0800\n\r" >&99
-read -t 1
+read -t 0.5
 printf ":4V0000\n\r" >&99
-read -t 1
-printf ":4C\n\r" >&99
-read -t 1
 
-
+echo " "
+echo " "
+echo " "
+echo "AZIMUT CAL!:		hCAL"
+echo " "
+echo "AZIMUT MAX:		hMAX"
+echo "AZIMUT BIG INC:		+++"
+echo "AZIMUT MED INC:		++"
 echo "AZIMUT SMALL INC:	+"
-echo "AZIMUT BIG INC:		++"
+echo "AZIMUT ZERO:	0"
 echo "AZIMUT SMALL DEC:	-"
-echo "AZIMUT BIG DEC:		--"
+echo "AZIMUT MED DEC:		--"
+echo "AZIMUT BIG DEC:		---"
+echo "AZIMUT MIN:		hMIN"
+echo " "
+echo " "
+echo "ELEVATION CAL:		vCAL"
+echo " "
+echo "ELEVATION MAX:		vMAX"
+echo "ELEVATION BIG INC:	v+++"
+echo "ELEVATION MED INC:	v++"
 echo "ELEVATION SMALL INC:	v+"
-echo "ELEVATION BIG INC:	v++"
+echo "ELEVATION ZERO:	v0"
 echo "ELEVATION SMALL DEC:	v-"
-echo "ELEVATION BIG DEC:	v--"
+echo "ELEVATION MED DEC:	v--"
+echo "ELEVATION BIG DEC:	v---"
+echo "ELEVATION MIN:		vMIN"
+echo " "
+echo "TOTAL RESET:		00"
+echo " "
+
 echo "RADIATION ON		R+"
 echo "RADIATION OFF		R-"
-echo "90 DEG ELEVATION		VVV"
-echo "WAITING FOR ORDER"
+echo "WAITING FOR ORDER..."
 
 while :
 do
 
 	read val
+	
+	#KALIBRÁCIÓK
+	if [ $val == 'hCAL' ]; then
+		printf ":2C\n\r" >&99
+		read -t 1
+		HVAL=2048
+		fi
+
+	if [ $val == 'vCAL' ]; then
+		printf ":4C\n\r" >&99
+		read -t 1
+		VVAL=0
+		fi
 	
 	
 	#HORIZONTÁLIS ÉRTÉKEK
@@ -63,41 +107,56 @@ do
 		
 	if [ $val == '0' ]; then
 		HVAL=2048; fi
+	
+	if [ $val == 'hMAX' ]; then
+		HVAL=$HMAX; fi
+		
+	if [ $val == 'hMIN' ]; then
+		HVAL=$HMIN; fi
 			
 	#HORIZONTÁLIS szélsőértékkorrekció		
-	if (( HVAL < 1024 )); then
-		HVAL=1024; fi
+	if (( HVAL < $HMIN )); then
+		HVAL=$HMIN; fi
 		
-	if (( HVAL > 3072 )); then
-		HVAL=3072; fi
+	if (( HVAL > $HMAX )); then
+		HVAL=$HMAX; fi
 	
 	
 	
 	#VERTIKÁLIS ÉRTÉKEK
 	if [ $val == 'v-' ]; then
-		VVAL=$((VVAL-10)); fi
+		VVAL=$((VVAL-30)); fi
 			
 	if [ $val == 'v--' ]; then
-		VVAL=$((VVAL-20)); fi			
+		VVAL=$((VVAL-60)); fi		
+
+	if [ $val == 'v---' ]; then
+		VVAL=$((VVAL-120)); fi	
 
 	if [ $val == 'v+' ]; then
-		VVAL=$((VVAL+10)); fi
+		VVAL=$((VVAL+30)); fi
 			
 	if [ $val == 'v++' ]; then
-		VVAL=$((VVAL+20)); fi
+		VVAL=$((VVAL+60)); fi
+		
+	if [ $val == 'v+++' ]; then
+		VVAL=$((VVAL+120)); fi
 		
 	if [ $val == 'v0' ]; then
 		VVAL=0; fi
 		
-	if [ $val == 'VVV' ]; then
-		VVAL=1000; fi
+	if [ $val == 'vMAX' ]; then
+		VVAL=$VMAX; fi
 		
+	if [ $val == 'vMIN' ]; then
+		VVAL=$VMIN; fi
+			
 	#VERTIKÁLIS szélsőértékkorrekció		
-	if (( VVAL < -114 )); then
-		VVAL=-114; fi
+	if (( VVAL < $VMIN )); then
+		VVAL=$VMIN; fi
 		
-	if (( VVAL > 1010 )); then
-		VVAL=1010; fi
+	if (( VVAL > $VMAX )); then
+		VVAL=$VMAX; fi
 	
 	
 	
@@ -118,8 +177,8 @@ do
 	read -t 1
 	printf ":4V$VVAL_HEX\n\r" >&99
 	
-	echo "HOR=${HVAL-2048}	$HVAL_HEX"
-	echo "VER=$VVAL	$VVAL_HEX"
+	echo "HOR:	HEX: 0x$HVAL_HEX	DEC: ${HVAL-2048}"
+	echo "VER:	HEX: 0x$VVAL_HEX	DEC: $VVAL"
 	
 	
 	#POCO
