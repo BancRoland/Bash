@@ -11,7 +11,7 @@ DEVICE=$(ls /dev/ttyUSB*)
 HVAL=2048
 VVAL=0
 
-
+cat .header.txt
 
 echo $DEVICE
 
@@ -31,6 +31,7 @@ echo ":2A\n\r"
 printf ":2H0800\n\r" >&99
 read -t 0.5
 printf ":4V0000\n\r" >&99
+echo "INITIALIZATION DONE"
 
 echo " "
 echo " "
@@ -41,7 +42,7 @@ echo "AZIMUT MAX:		hMAX"
 echo "AZIMUT BIG INC:		+++"
 echo "AZIMUT MED INC:		++"
 echo "AZIMUT SMALL INC:	+"
-echo "AZIMUT ZERO:	0"
+echo "AZIMUT ZERO:		0"
 echo "AZIMUT SMALL DEC:	-"
 echo "AZIMUT MED DEC:		--"
 echo "AZIMUT BIG DEC:		---"
@@ -54,7 +55,7 @@ echo "ELEVATION MAX:		vMAX"
 echo "ELEVATION BIG INC:	v+++"
 echo "ELEVATION MED INC:	v++"
 echo "ELEVATION SMALL INC:	v+"
-echo "ELEVATION ZERO:	v0"
+echo "ELEVATION ZERO:		v0"
 echo "ELEVATION SMALL DEC:	v-"
 echo "ELEVATION MED DEC:	v--"
 echo "ELEVATION BIG DEC:	v---"
@@ -65,7 +66,8 @@ echo " "
 
 echo "RADIATION ON		R+"
 echo "RADIATION OFF		R-"
-echo "WAITING FOR ORDER..."
+echo ""
+echo "[WAITING FOR ORDER...]"
 
 while :
 do
