@@ -1,6 +1,9 @@
 #!/bin/bash
 
-A=5
-B=4
+A=15
+B=2
 C=$(($A+$B))
 echo $C
+
+D=$(($A/$B))
+echo $D
