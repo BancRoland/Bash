@@ -8,7 +8,8 @@ stty ispeed 9600 < $DEVICE
 exec 99<>$DEVICE
 
 printf ":2S1\n\r" >&99	#sebességek :2S[0123]	'0': 7deg/sec	'1': 14 deg/sec (default)    '2': 6 deg/sec    '3': 12 deg/sec
-printf ":2M01000800\n\r" >&99
+# printf ":2M01000800\n\r" >&99
+printf ":2M001007BC\n\r" >&99
 read -t 4
 
 #printf ":4V0100\n\r" >&99

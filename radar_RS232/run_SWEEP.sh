@@ -23,17 +23,14 @@ exec 99<>/dev/ttyUSB*
 read -t 0.5
 echo serial init
 printf ":2I\n\r" >& 99
-read -t 0.5
+# read -t 0.5
 echo ":2I\n\r"
 printf ":2A\n\r" >& 99
-read -t 0.5
+# read -t 0.5
 echo ":2A\n\r"
-printf ":2H0800\n\r" >&99
-read -t 0.5
-printf ":4V0000\n\r" >&99
-echo "INITIALIZATION DONE"
 
-echo " "
+
+####
 echo " "
 echo " "
 echo "AZIMUT CAL!:		hCAL"
