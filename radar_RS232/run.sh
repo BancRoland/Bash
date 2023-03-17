@@ -20,16 +20,16 @@ stty ispeed 9600 < $DEVICE
 stty speed < /dev/ttyUSB*
 exec 99<>$DEVICE
 exec 99<>/dev/ttyUSB*
-read -t 0.5
+sleep 1
 echo serial init
 printf ":2I\n\r" >& 99
-read -t 0.5
+sleep 1
 echo ":2I\n\r"
 printf ":2A\n\r" >& 99
-read -t 0.5
+sleep 1
 echo ":2A\n\r"
 printf ":2H0800\n\r" >&99
-read -t 0.5
+sleep 1
 printf ":4V0000\n\r" >&99
 echo "INITIALIZATION DONE"
 
@@ -79,13 +79,13 @@ do
 	#KALIBRÁCIÓK
 		'hCAL')
 			printf ":2C\n\r" >&99
-			read -t 1
+			sleep 1
 			HVAL=2048
 			;;
 			
 		'vCAL')
 			printf ":4C\n\r" >&99
-			read -t 1
+			sleep 1
 			VVAL=0
 			;;
 	
@@ -135,7 +135,7 @@ do
 	#POCO
 		'R+')
 			# printf ":3P0\n\r" >& 99
-			# read -t 1
+			sleep 1
 			printf ":3P3\n\r" >& 99
 			echo "RADIATION ON"
 			;;
@@ -175,7 +175,7 @@ do
 	VVAL_HEX=${VVAL_HEX0:(-4)}
 	
 	printf ":2H$HVAL_HEX\n\r" >&99
-	read -t 1
+	sleep 1
 	printf ":4V$VVAL_HEX\n\r" >&99
 	
 	echo "HOR:	HEX: 0x$HVAL_HEX	DEC: ${HVAL-2048}"
