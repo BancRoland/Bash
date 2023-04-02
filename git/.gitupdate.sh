@@ -46,6 +46,9 @@ read -p "do you want to add? (y/n)" yn
 if [[ $yn == "y" ]]
 then
     echo you choose yes
+    git add .
+    git commit -m "."
+    git push
 fi
 
 echo "
