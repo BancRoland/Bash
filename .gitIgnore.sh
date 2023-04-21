@@ -22,6 +22,8 @@ echo *.i16 >> .gitignore
 echo *.out >> .gitignore
 echo *.ci16 >> .gitignore
 echo *.taps >> .gitignore
+echo *.c >> .gitignore
+echo *.out >> .gitignore
 
 echo .gitignore file:
 echo
