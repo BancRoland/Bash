@@ -17,11 +17,16 @@ echo *.BIN >> .gitignore
 echo *.dat >> .gitignore
 echo *.DAT >> .gitignore
 echo *.deb >> .gitignore
-echo *.cf32 >> .gitignore
 echo *.i16 >> .gitignore
 echo *.out >> .gitignore
 echo *.ci16 >> .gitignore
+echo *.CI16 >> .gitignore
 echo *.taps >> .gitignore
+echo *.cf32 >> .gitignore
+echo *.CF32 >> .gitignore
+echo *.wav >> .gitignore
+echo *.mp3 >> .gitignore
+
 
 echo .gitignore file:
 echo
