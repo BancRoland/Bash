@@ -1,6 +1,6 @@
 #!/bin/bash
-DES="2023.06.10. 12:05:00"
-DATE=$(date +"%Y.%m.%d. %H:%M:%S")
+DES="20:27:00"
+DATE=$(date +%H:%M:%S)
 echo $DATE
 
 if [[ $DATE > "20:50:00" ]]; then
@@ -11,12 +11,14 @@ fi
 
 while true
 do
-NOW=$(date +"%Y.%m.%d %H:%M:%S")
+NOW=$(date +%H:%M:%S)
 echo time now: $NOW
 echo later than $DES?
 
 if [[ $NOW > $DES ]]; then
-    bash pinger.sh
+    echo yes
+else
+    echo no
 fi
 sleep 1
 
