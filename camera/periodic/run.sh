@@ -10,7 +10,8 @@ cd $DATE
 while true
 do
     # fswebcam --no-banner --png 0 -r 1280x720 --save image`date "+%F_%T"`.png
-    # fswebcam --no-banner --png 0 -d /dev/video2 -r 1280x720 --save image`date "+%F_%T"`.png     # DELL laptop
-    fswebcam --no-banner --png 0 -d /dev/video0 -r 1280x720 -S 10 -D 0 -F 10 --save image`date "+%F_%T"`.png     # kuvik PC
+    # fswebcam --no-banner --png 0 -d /dev/video2 -r 1280x720 -S 10 -D 0 -F 10 --save image`date "+%F_%T"`.png     # DELL laptop
+    fswebcam --no-banner --png 0 -d /dev/video2 -r 1280x720 -S 10 --save image`date "+%F_%T"`.png     # DELL laptop
+    # fswebcam --no-banner --png 0 -d /dev/video0 -r 1280x720 -S 10 -D 0 -F 10 --save image`date "+%F_%T"`.png     # kuvik PC
     sleep 10
 done
