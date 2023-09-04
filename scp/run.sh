@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+
 FOLDER=/home/roland/Desktop/kuvik/ads-b/log/raw
 FILE=/home/roland/Desktop/kuvik/ads-b/log/raw
 IP="192.168.1.2"
