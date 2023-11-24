@@ -1,8 +1,7 @@
 #!/bin/bash
 
 mkdir .ssh
-cp ~/.ssh/* ./.ssh
-cat id_ed25519.pub
+# cp ~/.ssh/* ./.ssh
 
 docker build -t reinstall_image .
 docker run -it --name reinstall_docker reinstall_image
