@@ -3,7 +3,7 @@
 mkdir .ssh
 # cp ~/.ssh/* ./.ssh
 
-docker build -t reinstall_image .
+docker build --ssh default -t reinstall_image .
 docker run -it --name reinstall_docker reinstall_image
 
 # docker ps -a    # list containers
