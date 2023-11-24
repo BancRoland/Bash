@@ -4,8 +4,11 @@ RUN apt-get update && apt-get install -y && apt-get install -y python3
 RUN apt install -y git
 
 
-RUN mkdir /root/.ssh
-COPY .ssh /root/.ssh
+# RUN mkdir /root/.ssh
+# COPY .ssh /root/.ssh
+RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
+RUN --mount=type=ssh git clone git@github.com:BancRoland/reinstall.git
+
 
 RUN mkdir Desktop && cd Desktop
 # RUN git clone git@github.com:BancRoland/reinstall.git

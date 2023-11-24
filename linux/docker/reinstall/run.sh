@@ -1,10 +1,10 @@
 #!/bin/bash
 
-mkdir .ssh
-cp ~/.ssh/* ./.ssh
-cat id_ed25519.pub
+# mkdir .ssh
+# cp ~/.ssh/* ./.ssh
+# cat id_ed25519.pub
 
-docker build -t reinstall_image .
+docker build --ssh default -t reinstall_image .
 docker run -it --name reinstall_docker reinstall_image
 
 # docker ps -a    # list containers
