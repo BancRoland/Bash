@@ -89,3 +89,5 @@ pipe
 *.CUF32
 
 *.gif
+/git/local-reomote/local
+/git/local-reomote/remote
