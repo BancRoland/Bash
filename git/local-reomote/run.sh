@@ -17,5 +17,11 @@ cd remote/
 git init --bare
 
 cd ../local/
-git remote add origin /home/roland/Desktop/Bash/git/local-reomote/remote
+git remote add origin ../remote
 git push --set-upstream origin master
+git log --oneline
+
+cd ..
+mkdir other
+cd other
+git clone ../remote

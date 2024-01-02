@@ -91,3 +91,5 @@ pipe
 *.gif
 /git/local-reomote/local
 /git/local-reomote/remote
+/git/local-reomote/other
+/git/local-reomote/remote2
