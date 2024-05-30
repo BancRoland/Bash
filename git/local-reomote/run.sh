@@ -25,3 +25,8 @@ cd ..
 mkdir other
 cd other
 git clone ../remote
+cd remote
+echo test2 >> README.md 
+git add .
+git commit -m "[FIX] mod"
+git push

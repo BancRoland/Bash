@@ -1,0 +1,45 @@
+RESULTS_DIR="/mnt/raid0/bancr/doa_error_eval/dvc/results"
+PROC_CFG= "dvc_config/procconfig.toml"
+MEAS_CFG= "dvc_config/measconfig.toml"
+[eval]
+use_gpu = true
+MAX_GEN_RD = 1000
+MEASUREMENT_FOLDER = "anotherstring"
+
+[display_parameters.plot_box_parameters]
+box_size        = [2,5] # [cell]
+box_color       = "orange"
+target_box_fmt_string = "{:d}<br>R:{:.1f}m<br>D:{:.1f}Hz<br>Az:{:.1f}<br>El:{:.1f}<br>SINR:{:.1f}dB"
+annotation_position = [0,-30]
+
+[display_parameters.track_box_parameters]
+box_size        = [2,5] # [cell]
+confirmed_box_color = "green"
+detected_box_color = "orange"
+predicted_box_color = "red"
+target_box_fmt_string = "{:d}<br>R:{:.1f}m<br>D:{:.1f}m/s<br>Az:{:.1f}<br>El:{:.1f}<br>SINR:{:.1f}dB"
+annotation_position = [0,-30]
+
+[display_parameters.track_show_options]
+show_confirmed = true
+show_detected = true
+show_predicted = false
+
+[display_parameters.export_stage_results]
+show_rd = true
+show_hit = true
+show_plot = true
+show_track = true
+show_ppi = true
+show_map = true
+#show_doa = false        # The doa spectrum plotter is obsoleted.
+show_antenna = true
+
+[display_parameters.ppi]
+max_range=1500
+
+[display_parameters.map]
+zoom_level = 12.5   # default zoom level (could be set in the html file), based on empirical values: 13.5 ~ 1 km, 12.5 ~ 2 km
+
+[permissions]
+mode = "USER"  # options: ADMIN, USER
